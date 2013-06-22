@@ -2,17 +2,17 @@
 
 # Unitopus #
 
-_Static blog generator that doesn't sucks._
+> Static blog generator that doesn't sucks.
 
 or maybe:
 
-_Static blog generator with seven legs off of complexity._
+> Static blog generator with seven legs off of complexity.
 
 or even better:
 
-_Unitopus brings the simplicity that no bi-polar man or any eight legged sea creature would!_
+> Unitopus brings the simplicity that no bi-polar man or any eight legged sea creature would!
 
-
+This is obviously a joke. Jekyll, Hyde, and Octopress are way more feature complete. :)
 
 ## Getting Started ##
 
