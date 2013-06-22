@@ -3,3 +3,5 @@
 require 'test/unit'
 require 'shoulda'
 require 'unitopus'
+
+stage = "test/stage"

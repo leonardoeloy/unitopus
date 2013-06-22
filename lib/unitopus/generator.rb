@@ -18,5 +18,18 @@ module Unitopus
 		def files
 			Dir.glob("#{@basedir}/**/*.md")
 		end
+
+		# Creates a site directory
+		#
+		# site: name of the directory, defaults to "site"
+		#
+		# Returns the full path: basedir + site
+		def create_site(site = "site")
+			path = "#{basedir}/#{site}"
+
+			Dir.mkdir(path) unless Dir.exist?(path)
+
+			path	
+		end
 	end
 end
