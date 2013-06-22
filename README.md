@@ -1,4 +1,4 @@
-{<img src="https://secure.travis-ci.org/leonardoeloy/unitopus.png?branch=master" alt="Build Status" />}[http://travis-ci.org/leonardoeloy/unitopus]
+[<img src="https://secure.travis-ci.org/leonardoeloy/unitopus.png?branch=master" alt="Build Status" />](http://travis-ci.org/leonardoeloy/unitopus)
 
 # Unitopus #
 
