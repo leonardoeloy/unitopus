@@ -2,6 +2,7 @@
 module Unitopus
 	class Generator
 		attr_reader :basedir
+		attr_reader :site
 
 		# Initializes a generator
 		#
@@ -10,6 +11,12 @@ module Unitopus
 		# Returns a new instance
 		def initialize(basedir)
 			@basedir = basedir
+
+			@site = "site"
+			sitepath = "#{@basedir}/#{@site}"
+			Dir.mkdir(sitepath) unless Dir.exist?(sitepath)
+
+			@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 		end
 
 		# Lists available markdown files to be processed
@@ -19,17 +26,42 @@ module Unitopus
 			Dir.glob("#{@basedir}/**/*.md")
 		end
 
-		# Creates a site directory
+		# Renders a file using Markdown
 		#
-		# site: name of the directory, defaults to "site"
+		# file: file path to be read and rendered
 		#
-		# Returns the full path: basedir + site
-		def create_site(site = "site")
-			path = "#{basedir}/#{site}"
+		# Return process HTML string
+		def markdown(file)
+			content = File.readlines(file).join(" ")
 
-			Dir.mkdir(path) unless Dir.exist?(path)
+			@markdown.render content
+		end
 
-			path	
+		# Creates the rendered markdown file
+		#
+		# file: absolute Markdown file path
+		#
+		# Returns the created absolute file path
+		def create_markdown(file)
+			filename = file.split("/").last.gsub(".md", ".html")
+			filepath = "#{basedir}/#{site}/#{filename}"
+
+			f = File.open(filepath, "w") 
+			f << markdown(file)
+			f.close
+
+			filepath
+		end
+
+		# Generates a static site
+		#
+		# basedir: base directory where markdown files will be read
+		def self.from(basedir)
+			generator = Unitopus::Generator.new(basedir)
+
+			generator.files.each do |file|
+				generator.create_markdown(file)
+			end
 		end
 	end
 end
