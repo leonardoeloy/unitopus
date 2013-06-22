@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   ## Make sure your summary is short. The description may be as long
   ## as you like.
-  s.summary     = "Static blog generator that Doesn't suck"
+  s.summary     = "Static blog generator that doesn't sucks"
   s.description = "Unitopus brings the simplicity that no bi-polar man or any sea creature would!"
 
   ## List the primary authors. If there are a bunch of authors, it's probably
