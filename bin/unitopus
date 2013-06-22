@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+
+require 'rubygems'
+require 'commander/import'
+require 'unitopus'
+
+program :name, 'unitopus'
+program :version, '0.0.1'
+program :description, 'Static site generator that doesn\'t suck'
+ 
+command :generate, do |c|
+  c.syntax = 'unitopus generate, [options]'
+  c.summary = 'Generates a new static site'
+  c.description = 'Generates a new static site from the current directory'
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    # Do something or c.when_called Unitopus::Commands::Generate,
+  end
+end
+
+command :unpack, do |c|
+  c.syntax = 'unitopus unpack, [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    # Do something or c.when_called Unitopus::Commands::Unpack,
+  end
+end
+
+command :browse do |c|
+  c.syntax = 'unitopus browse [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    # Do something or c.when_called Unitopus::Commands::Browse
+  end
+end
+
