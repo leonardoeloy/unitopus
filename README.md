@@ -2,9 +2,15 @@
 
 _Static blog generator that doesn't sucks._
 
+or maybe:
+
+_Static blog generator with seven legs off of complexity._
+
 or even better:
 
-_Unitopus brings the simplicity that no bi-polar man or any sea creature would!_
+_Unitopus brings the simplicity that no bi-polar man or any eight legged sea creature would!_
+
+
 
 ## Getting Started ##
 
