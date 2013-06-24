@@ -1,4 +1,7 @@
 # enconding: utf-8
+
+require 'fileutils'
+
 module Unitopus
 	class Generator
 		attr_reader :basedir
@@ -14,7 +17,7 @@ module Unitopus
 
 			@site = "site"
 			sitepath = "#{@basedir}/#{@site}"
-			Dir.mkdir(sitepath) unless Dir.exist?(sitepath)
+			FileUtils.mkdir_p(sitepath) unless Dir.exist?(sitepath)
 
 			@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 		end
