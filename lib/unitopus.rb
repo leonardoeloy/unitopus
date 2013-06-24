@@ -7,6 +7,7 @@ def require_files(path)
 end
 
 require 'rubygems'
+require 'logger'
 require 'redcarpet'
 require 'mustache'
 require 'unitopus/generator'
@@ -17,4 +18,8 @@ require_files 'unitopus/plugins'
 
 module Unitopus
 	VERSION = '0.0.1'
+
+  def self.logger
+    @@logger ||= Logger.new "unitopus.log"
+  end
 end

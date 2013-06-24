@@ -22,5 +22,12 @@ module Unitopus
     def self.plugins
       @@plugins
     end    
+
+    def self.handle(line)
+      plugins.each do |plugin|
+        klass = Object.const_get(plugin)
+        
+      end
+    end
   end
 end

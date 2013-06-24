@@ -63,6 +63,7 @@ module Unitopus
 			generator = Unitopus::Generator.new(basedir)
 
 			generator.files.each do |file|
+				Unitopus.logger.info "Processing #{file}..."
 				generator.create_markdown(file)
 			end
 		end
