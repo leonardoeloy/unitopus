@@ -4,7 +4,7 @@ require 'test_helper'
 require 'fileutils'
 
 class GeneratorTest < Test::Unit::TestCase
-  stage = "test/stage"
+  stage = "#{Dir.pwd}/test/stage"
 
 	context "generator" do 
     context "initialize" do
@@ -44,7 +44,7 @@ class GeneratorTest < Test::Unit::TestCase
       setup do
         FileUtils.rm_r("#{stage}/site") if Dir.exist?("#{stage}/site")
       end  
-          
+
       should "render a file" do
         generator = Unitopus::Generator.new(stage)
 
