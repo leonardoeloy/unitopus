@@ -15,7 +15,7 @@ class GeneratorTest < Test::Unit::TestCase
 
     should "list markdown files" do
       generator = Unitopus::Generator.new(stage)
-      assert_equal ["#{stage}/test.md"], generator.files
+      assert_equal ["#{stage}/test-without-metadata.md", "#{stage}/test.md"], generator.files
     end
 
     context "site directory" do
@@ -48,14 +48,14 @@ class GeneratorTest < Test::Unit::TestCase
       should "render a file" do
         generator = Unitopus::Generator.new(stage)
 
-        rendered = generator.markdown("#{stage}/test.md")
+        rendered = generator.markdown("#{stage}/test-without-metadata.md")
 
         assert "<h1>This is a test</h1>", rendered
       end
 
       should "create HTML file" do
         generator = Unitopus::Generator.new(stage)
-        filepath = generator.create_markdown("#{stage}/test.md")
+        filepath = generator.create_markdown("#{stage}/test-without-metadata.md")
 
         assert File.exist?(filepath)
       end
@@ -63,7 +63,7 @@ class GeneratorTest < Test::Unit::TestCase
       should "convert existing files" do
         Unitopus::Generator.from(stage)
 
-        html_file = "#{stage}/site/test.html"
+        html_file = "#{stage}/site/test-without-metadata.html"
         assert File.exist?(html_file), "HTML file #{html_file} doesn't exists"
       end
 
