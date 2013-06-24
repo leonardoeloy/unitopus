@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/leonardoeloy/unitopus.png?branch=master)](https://travis-ci.org/leonardoeloy/unitopus)
+[![Code Climate](https://codeclimate.com/github/leonardoeloy/unitopus.png)](https://codeclimate.com/github/leonardoeloy/unitopus)
 
 # Unitopus #
 
