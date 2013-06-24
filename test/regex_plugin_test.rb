@@ -11,14 +11,34 @@ class RegexPluginTest < Test::Unit::TestCase
           @parameter = :example
         end
       end
+
+      @plugin = DumbPlugin.new
     end
 
-    should "process the line and return a parameter" do
-      dumb_plugin = DumbPlugin.new
-      actual = dumb_plugin.handle("Example: value")
+    should "match one group" do
+      actual = @plugin.handle("Example: value")
       expected = { :example => "value"}
-      
+
       assert_equal expected, actual
+    end
+
+    should "match more than one group" do
+      class DumbPlugin < Unitopus::RegexPlugin 
+        def initialize
+          @regex = /^Example: (.*) - (.*)$/
+          @parameter = :example
+        end
+      end
+
+      @plugin = DumbPlugin.new
+      actual = @plugin.handle("Example: first - second")
+      expected = { :example => ["first", "second"] }
+
+      assert_equal expected, actual
+    end
+
+    should "return nil when no matches happen" do
+      assert_nil @plugin.handle("any string")
     end
   end
 end
