@@ -6,9 +6,11 @@ module Unitopus
     attr_reader :name, :description, :author
 
     def initialize
+      # Placeholder
     end
 
     def handle(line)
+      # Placeholder
     end
   end
 end
