@@ -8,9 +8,11 @@ end
 
 require 'rubygems'
 require 'redcarpet'
+require 'mustache'
 require 'unitopus/generator'
 require 'unitopus/plugin'
 require 'unitopus/regex_plugin'
+
 require_files 'unitopus/plugins'
 
 module Unitopus

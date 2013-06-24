@@ -28,5 +28,17 @@ class PluginTest < Test::Unit::TestCase
     should "handle processing" do
       assert_respond_to @plugin, :handle
     end
+
+    context "registry" do
+      should "have all plugins" do
+        current_plugins = Unitopus::Plugin.plugins
+
+        class DumbPlugin < Unitopus::Plugin
+        end
+
+        expected_plugins = current_plugins << "DumbPlugin"
+        assert_equal expected_plugins, Unitopus::Plugin.plugins 
+      end
+    end
   end
 end

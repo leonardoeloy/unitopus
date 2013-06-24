@@ -12,5 +12,15 @@ module Unitopus
     def handle(line)
       # Placeholder
     end
+
+    @@plugins = []
+
+    def self.inherited(base)
+      @@plugins << base.name
+    end
+
+    def self.plugins
+      @@plugins
+    end    
   end
 end

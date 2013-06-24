@@ -3,7 +3,7 @@
 module Unitopus
 
   # Acts as an abstraction for plugins which will only perform regex operations
-  class RegexPlugin < Plugin
+  class RegexPlugin < Unitopus::Plugin
     attr_reader :regex
     attr_reader :parameter
 
