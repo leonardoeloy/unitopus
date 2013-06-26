@@ -18,7 +18,9 @@ module Unitopus
     def self.inherited(base)
       # Just register plugins from the Unitopus::Plugins module
       return unless base.name =~ /^Unitopus::Plugins::.*$/
-      @@plugins << base.name
+      
+      #Unitopus.logger.info "Registering plugin #{base}..."
+      @@plugins << base
     end
 
     def self.plugins
@@ -28,12 +30,14 @@ module Unitopus
     def self.handle(line)
       parameters = {}
 
-      plugins.each do |plugin|
-        Unitopus.logger.info "Plugin: #{plugin} - Parameters: #{parameters}"
-        klass = Object.const_get(plugin)
-
-        parameters << klass.handle(line)
+      @@plugins.each do |plugin|
+        klass = plugin.new
+        Unitopus.logger.info "#{plugin}: #{klass.name} - Parameters: #{parameters}"
+        value = klass.handle(line)
+        parameters.merge klass.handle(line) unless value.nil?
       end
+
+      parameters
     end
   end
 end
