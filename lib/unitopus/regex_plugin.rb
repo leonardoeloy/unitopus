@@ -15,6 +15,8 @@ module Unitopus
     #
     # Returns nil if no match found or { @parameter => result }
     def handle(line)
+      raise "#{self.class}: No regex defined" if @regex.nil?
+
       # Matches the current line against the specified regex
       # and skips the first element of the array, which is always the
       # matched string.
@@ -23,13 +25,17 @@ module Unitopus
       # => ["Author: Leonardo Eloy", "Leonardo Eloy"]
       # (...).to_a.[1..-1]
       # => ["Leonardo Eloy"]
-      
+
       value = @regex.match(line).to_a[1..-1]
       value = value[0] if value != nil and value.kind_of?(Array) and value.length == 1
+      Unitopus.logger.debug "#{self.class}: Applying regex [#{@regex}] to [#{line}], got [#{value}]"
 
-      return nil unless value != nil
+      return nil if value.nil?
 
-      { @parameter => value }
+      to_return = { @parameter => value }
+      Unitopus.logger.debug "#{self.class}: Will return [#{to_return}]"
+
+      to_return
     end
   end
 end

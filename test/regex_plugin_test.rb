@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'test_helper'
+require File.join(File.dirname(__FILE__), 'test_helper')
 
 class RegexPluginTest < Test::Unit::TestCase
   context "regex plugin" do
@@ -13,6 +13,18 @@ class RegexPluginTest < Test::Unit::TestCase
       end
 
       @plugin = DumbPlugin.new
+    end
+
+    should "raise exception if regex not specified" do
+      class WrongDumbPlugin < Unitopus::RegexPlugin 
+        def initialize
+        end
+      end
+
+      @plugin = WrongDumbPlugin.new
+      assert_raise RuntimeError do
+        @plugin.handle "test"
+      end
     end
 
     should "match one group" do

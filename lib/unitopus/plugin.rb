@@ -13,31 +13,45 @@ module Unitopus
       # Placeholder
     end
 
-    @@plugins = []
-
     def self.inherited(base)
       # Just register plugins from the Unitopus::Plugins module
       return unless base.name =~ /^Unitopus::Plugins::.*$/
-      
-      #Unitopus.logger.info "Registering plugin #{base}..."
-      @@plugins << base
+
+      # FIXME Somehow this raises an error. Are all the methods loaded into ObjectSpace while inherited is being called?
+      # Unitopus.logger.info "Registering plugin #{base}..."
+      plugins << base.new
     end
 
     def self.plugins
-      @@plugins
+      @@plugins ||= []
     end    
 
-    def self.handle(line)
+    def self.handle(lines)
       parameters = {}
+      lines = [lines] unless lines.kind_of?(Array)
 
-      @@plugins.each do |plugin|
-        klass = plugin.new
-        Unitopus.logger.info "#{plugin}: #{klass.name} - Parameters: #{parameters}"
-        value = klass.handle(line)
-        parameters.merge klass.handle(line) unless value.nil?
+      lines.each do |line|
+        parameters.merge! handle_line(line)
       end
 
       parameters
     end
+
+    private
+    def self.handle_line(line)
+      parameters = {}
+      Unitopus.logger.debug "Plugin: Processing line #{line}"
+      @@plugins.each do |plugin|
+        Unitopus.logger.debug "Before calling #{plugin}: #{parameters}"
+
+        value = plugin.handle(line)
+        Unitopus.logger.debug "After calling #{plugin}: #{parameters}"
+        
+        parameters.merge!(value) unless value.nil?
+      end
+      
+      parameters 
+    end
+
   end
 end

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'test_helper'
+require File.join(File.dirname(__FILE__), 'test_helper')
 require 'fileutils'
 
 class GeneratorTest < Test::Unit::TestCase
@@ -55,6 +55,10 @@ class GeneratorTest < Test::Unit::TestCase
         @stage = setup_stage
       end  
 
+      teardown do
+        teardown_stage @stage
+      end      
+
       should "render a file" do
         generator = Unitopus::Generator.new(@stage)
 
@@ -76,13 +80,6 @@ class GeneratorTest < Test::Unit::TestCase
         html_file = "#{@stage}/site/test-without-metadata.html"
         assert File.exist?(html_file), "HTML file #{html_file} doesn't exists"
       end
-
-      teardown do
-        teardown_stage @stage
-      end      
-    end
-
-    context "plugin integration" do
     end
 	end
 end

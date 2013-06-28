@@ -36,17 +36,8 @@ module Unitopus
 		# Return process HTML string
 		def markdown(file)
 			content = File.readlines(file)
-			
+
 			@markdown.render content.join(" ")
-		end
-
-		def run_plugins(content)
-			parameters = {}
-			content.each do |line|
-				parameters.merge Unitopus::Plugin.handle(line)
-			end
-
-			parameters			
 		end
 
 		# Creates the rendered markdown file
@@ -56,7 +47,7 @@ module Unitopus
 		# Returns the created absolute file path
 		def create_markdown(file)
 			filename = file.split("/").last.gsub(".md", ".html")
-			filepath = "#{basedir}/#{site}/#{filename}"
+			filepath = File.join(basedir, site, filename)
 			content = markdown(file)
 
 			f = File.open(filepath, "w") 
