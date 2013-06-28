@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), 'test_helper')
 
 class PluginTest < Test::Unit::TestCase
 
-  context "plugin" do 
+  context "plugin" do
     setup do
       @plugin = Unitopus::Plugin.new
     end
